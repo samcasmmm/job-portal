@@ -3,10 +3,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
+import 'express-async-errors';
 
 //file imports
 import connectDB from './config/db.js';
 import authRoute from './routes/authRoute.js';
+import errorMiddleware from './middlewares/errorMiddleware.js';
 
 // REST Object
 const app = express();
@@ -24,6 +26,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRoute);
+
+// validation middleware
+app.use(errorMiddleware);
 
 //  listen
 const startServer = async () => {
