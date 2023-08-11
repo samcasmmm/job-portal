@@ -1,0 +1,62 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+
+# Express.js
+dist/
+build/
+*.log
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# React
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock
+*.env
+
+# macOS
+.DS_Store
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Logs
+*.log
+logs/
+*.log.*
+*.access
+*.error
+
+# Dependency directories
+.bower_components/
+jspm_packages/
+
+# Compiled binary addons (usually in node_modules)
+*.node
+
+# Typescript
+*.tsbuildinfo
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
