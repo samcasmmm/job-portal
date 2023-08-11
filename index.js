@@ -6,17 +6,16 @@ import cors from 'cors';
 
 //file imports
 import connectDB from './config/db.js';
+import authRoute from './routes/authRoute.js';
 
 // REST Object
-
 const app = express();
 
 // Middlewares
 app.use(express.json());
 app.use(cors());
 
-// routes
-
+//  routes
 app.get('/', (req, res) => {
   res.send({
     status: 'Running',
@@ -24,8 +23,9 @@ app.get('/', (req, res) => {
   });
 });
 
-// listen
+app.use('/api/v1/auth', authRoute);
 
+//  listen
 const startServer = async () => {
   try {
     connectDB(process.env.MONGODB_URL);
