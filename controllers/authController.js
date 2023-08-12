@@ -1,4 +1,6 @@
 import User from './../models/userSchema.js';
+import cookie from 'cookie';
+import http from 'http';
 
 export const registerController = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -19,11 +21,48 @@ export const registerController = async (req, res, next) => {
     email,
     password,
   });
+  const token = newUser.createJWT();
   const { password: _password, ...userWithoutPassword } = newUser._doc;
+
   res.status(201).send({
     message: 'User Created Successfully',
     success: true,
     status: res.statusCode,
-    data: newUser._doc,
+    data: userWithoutPassword,
+    jwt: token,
+  });
+};
+
+export const loginController = async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    next('Please provide valid field');
+  }
+  const user = await User.findOne({ email }).select('+password');
+  if (!user) {
+    next('Invalid username or password');
+  }
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    next('Invalid username or password');
+  }
+  const token = user.createJWT();
+  const { password: _password, ...userWithoutPassword } = user._doc;
+
+  res.setHeader(
+    'Set-Cookie',
+    cookie.serialize('jwtToken', token, {
+      httpOnly: true,
+      maxAge: 3 * 24 * 60 * 60 * 1000,
+      secure: true,
+    })
+  );
+
+  res.status(200).json({
+    message: 'User Login Successfully',
+    success: true,
+    status: res.statusCode,
+    data: userWithoutPassword,
+    jwt: token,
   });
 };

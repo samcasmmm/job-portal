@@ -19,7 +19,9 @@ const errorMiddleware = (err, req, res, next) => {
     )} Field has to be unique`;
   }
 
-  res.status(defaultErrors.statusCode).json({ message: defaultErrors.message });
+  res
+    .status(defaultErrors.statusCode)
+    .json({ message: defaultErrors.message || err });
 };
 
 export default errorMiddleware;
