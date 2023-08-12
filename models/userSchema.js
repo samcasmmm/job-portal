@@ -22,6 +22,45 @@ const userSchema = new mongoose.Schema(
     location: {
       type: String,
     },
+    profile: {
+      firstName: String,
+      lastName: String,
+      headline: String,
+      summary: String,
+      contactInfo: {
+        phone: String,
+        address: String,
+        website: String,
+      },
+      experience: [
+        {
+          title: String,
+          company: String,
+          location: String,
+          startDate: Date,
+          endDate: Date,
+          description: String,
+        },
+      ],
+      education: [
+        {
+          degree: String,
+          school: String,
+          graduationDate: Date,
+        },
+      ],
+      skills: [String],
+      certifications: [String],
+      languages: [String],
+    },
+    // applications: [
+    //   {
+    //     jobId: ObjectId,
+    //     applicationDate: Date,
+    //     status: String, // "Submitted", "Under Review", "Accepted", "Rejected"
+    //     message: String, // Optional: Cover letter or additional message
+    //   },
+    // ],
   },
   { timestamps: true }
 );
