@@ -58,6 +58,7 @@ const userSchema = new mongoose.Schema(
     //     jobId: ObjectId,
     //     applicationDate: Date,
     //     status: String, // "Submitted", "Under Review", "Accepted", "Rejected"
+
     //     message: String, // Optional: Cover letter or additional message
     //   },
     // ],
@@ -66,6 +67,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre('save', async function () {
+  if (!this.isModified()) return;
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });

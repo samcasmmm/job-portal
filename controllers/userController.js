@@ -11,14 +11,13 @@ export const updateUserController = async (req, res, next) => {
   });
   if (!updatedUser) {
     res.status(404).json({ message: 'User not found' });
+    await updatedUser.save();
   } else {
     const token = updatedUser.createJWT();
-    res
-      .status(200)
-      .json({
-        message: 'User updated successfully!',
-        user: updatedUser,
-        token,
-      });
+    res.status(200).json({
+      message: 'User updated successfully!',
+      user: updatedUser,
+      token,
+    });
   }
 };

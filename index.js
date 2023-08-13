@@ -10,6 +10,7 @@ import connectDB from './config/db.js';
 import authRoute from './routes/authRoute.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import userRoute from './routes/userRoute.js';
+import jobRoute from './routes/jobRoute.js';
 
 // REST Object
 const app = express();
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/profile', userRoute);
+app.use('/api/v1/job', jobRoute);
 
 // validation middleware
 app.use(errorMiddleware);
