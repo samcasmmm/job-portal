@@ -27,3 +27,5 @@ router.delete('/delete-job/:id', userAuth, deleteJobController);
 router.get('/job-stats', userAuth, jobStatsController);
 
 export default router;
+
+
